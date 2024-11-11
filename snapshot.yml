@@ -6,7 +6,7 @@
   tasks:
     - name: Create a snapshot
       community.vmware.vmware_guest_snapshot:
-        hostname: "{{ 192.168.1.70 }}"
+        hostname: "{{ 192.168.1.70/ui/#/login}}"
         username: "{{ root }}"
         password: "{{ kharian@82 }}"
         datacenter: "{{ datastore1 }}"
