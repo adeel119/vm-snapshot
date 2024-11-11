@@ -1,0 +1,20 @@
+---
+- name: Take a snapshot of a VM
+  hosts: all
+  remote_user: root
+
+  tasks:
+    - name: Create a snapshot
+      community.vmware.vmware_guest_snapshot:
+        hostname: "{{ 192.168.1.70 }}"
+        username: "{{ root }}"
+        password: "{{ kharian@82 }}"
+        datacenter: "{{ datastore1 }}"
+        folder: "{{ [datastore1] vm1/ }}"
+        name: "{{ vm1 }}"
+        state: present
+        snapshot_name: "VM_Snapshot"
+        description: "Snapshot before Ansible execution"
+        quiesce: true
+        memory_dump: true
+      delegate_to: localhost
