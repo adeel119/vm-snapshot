@@ -1,21 +1,24 @@
 ---
-- name: Take a snapshot of a VM
+- name: Take VM Snapshots for Multiple VMs
   hosts: all
-  remote_user: root
-
   tasks:
-    - name: Create a snapshot
-      community.vmware.vmware_guest_snapshot:
-        hostname: "{{ 192.168.1.70/ui/#/login}}"
-        username: "{{ root }}"
+    - name: Define VM hosts and details
+      set_fact:
+        vm_hosts:
+          - { name: 'vm1', ip: '192.168.1.202' }
+          - { name: 'vm2', ip: '192.168.1.72' }
+          - { name: 'vm3', ip: '192.168.1.73' }
+
+    - name: Loop through each VM host and create a snapshot
+      vmware_guest_snapshot:
+        hostname: "{{192.168.1.70/ui/#/login}}"
+        username: "{{ root  }}"
         password: "{{ kharian@82 }}"
-        datacenter: "{{ datastore1 }}"
-        folder: "{{ [datastore1] vm/* }}"
-        name: "{{ via-ansible }}"
-        state: present
+        validate_certs: no
+        folder: "{{ datastore1  }}"
+        name: "{{ via-ansible}}"
+        snapshot_name: "{{ VM_SnapshotVA }}_snapshot"
         memory: no
-        snapshot_name: "VM_SnapshotVA"
-        description: "Snapshot before Ansible execution"
-        quiesce: true
-        memory_dump: true
+        state: present
+      with_items: "{{ vm_hosts }}"
       delegate_to: localhost
