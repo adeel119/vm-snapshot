@@ -7,6 +7,7 @@
     vcenter_username: "root"
     vcenter_password: "kharian@82"
     folder: "datastore1"
+    snapshot_prefix: "VM_SnapshotVA"
 
   tasks:
     - name: Define VM hosts and details
@@ -18,13 +19,13 @@
 
     - name: Loop through each VM host and create a snapshot
       vmware_guest_snapshot:
-        hostname: "{{ 192.168.1.70/ui/#/login }}"
-        username: "{{ root  }}"
-        password: "{{ kharian@82 }}"
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
         validate_certs: no
-        folder: "{{ datastore1 }}"
+        folder: "{{ folder }}"
         name: "{{ item.name }}"
-        snapshot_name: "{{VM_SnapshotVA }}_snapshot"
+        snapshot_name: "{{ snapshot_prefix }}_{{ item.name }}_snapshot"
         memory: no
         state: present
       with_items: "{{ vm_hosts }}"
