@@ -1,6 +1,7 @@
 ---
 - name: Take VM Snapshots for Multiple VMs
   hosts: all
+  become: yes
   tasks:
     - name: Define VM hosts and details
       set_fact:
@@ -11,13 +12,13 @@
 
     - name: Loop through each VM host and create a snapshot
       vmware_guest_snapshot:
-        hostname: "{{192.168.1.70/ui/#/login}}"
-        username: "{{ root  }}"
-        password: "{{ kharian@82 }}"
+        hostname: "192.168.1.70"
+        username: "root"
+        password: "kharian@82"
         validate_certs: no
-        folder: "{{ datastore1  }}"
-        name: "{{ via-ansible}}"
-        snapshot_name: "{{ VM_SnapshotVA }}_snapshot"
+        folder: "datastore1"
+        name: "{{ item.name }}"
+        snapshot_name: "{{ item.name }}_snapshot"
         memory: no
         state: present
       with_items: "{{ vm_hosts }}"
