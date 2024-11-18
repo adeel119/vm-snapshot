@@ -10,10 +10,11 @@
         username: "{{ root }}"
         password: "{{ kharian@82 }}"
         datacenter: "{{ datastore1 }}"
-        folder: "{{ [datastore1] vm1/ }}"
-        name: "{{ vm2 }}"
+        folder: "{{ [datastore1] vm/* }}"
+        name: "{{ via-ansible }}"
         state: present
-        snapshot_name: "VM_Snapshot"
+        memory: no
+        snapshot_name: "VM_SnapshotVA"
         description: "Snapshot before Ansible execution"
         quiesce: true
         memory_dump: true
