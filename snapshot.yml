@@ -16,8 +16,7 @@
           - { name: 'vm1', ip: '192.168.1.202' }
           - { name: 'vm2', ip: '192.168.1.72' }
           - { name: 'vm3', ip: '192.168.1.73' }
-
-    - name: Loop through each VM host and create a snapshot
+   - name: Loop through each VM host and create a snapshot
       vmware_guest_snapshot:
         hostname: "{{ vcenter_hostname }}"
         username: "{{ vcenter_username }}"
