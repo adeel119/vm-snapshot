@@ -18,9 +18,9 @@
           - { name: 'vm3', ip: '192.168.1.73' }
    - name: Loop through each VM host and create a snapshot
       vmware_guest_snapshot:
-        hostname: "{{ 192.168.1.70 }}"
-        username: "{{ 192.168.1.70 }}"
-        password: "{{ 192.168.1.70 }}"
+        hostname: "{{ 192.168.1.72 }}"
+        username: "{{ root }}"
+        password: "{{ kharian@82}}"
         validate_certs: no
         folder: "{{ datastore1 }}"
         name: "{{ VM_SnapshotVA }}"
