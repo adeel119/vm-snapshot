@@ -18,13 +18,13 @@
           - { name: 'vm3', ip: '192.168.1.73' }
    - name: Loop through each VM host and create a snapshot
       vmware_guest_snapshot:
-        hostname: "{{ vcenter_hostname }}"
-        username: "{{ vcenter_username }}"
-        password: "{{ vcenter_password }}"
+        hostname: "{{ 192.168.1.70 }}"
+        username: "{{ 192.168.1.70 }}"
+        password: "{{ 192.168.1.70 }}"
         validate_certs: no
-        folder: "{{ folder }}"
-        name: "{{ item.name }}"
-        snapshot_name: "{{ snapshot_prefix }}_{{ item.name }}_snapshot"
+        folder: "{{ datastore1 }}"
+        name: "{{ VM_SnapshotVA }}"
+        snapshot_name: "{{ VM_SnapshotVA }}_{{ VM_SnapshotVA }}_snapshot"
         memory: no
         state: present
       with_items: "{{ vm_hosts }}"
