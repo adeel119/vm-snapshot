@@ -1,6 +1,6 @@
 ---
-- name: Take VM Snapshots for Multiple VMs
-  hosts: all
+- name: Take VM Snapshot for a Single VM
+  hosts: localhost
   become: yes
   vars:
     vcenter_hostname: "192.168.1.70"
@@ -10,20 +10,15 @@
     snapshot_prefix: "VM_SnapshotVA"
 
   tasks:
-    - name: Define VM hosts and details
-      set_fact:
-        vm_hosts:
-          - { name: 'vm1', ip: '192.168.1.202' }
-   - name: Loop through each VM host and create a snapshot
+    - name: Create a snapshot for the specified VM
       vmware_guest_snapshot:
-        hostname: "{{ 192.168.1.72 }}"
-        username: "{{ root }}"
-        password: "{{ kharian@82}}"
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
         validate_certs: no
-        folder: "{{ datastore1 }}"
-        name: "{{ VM_SnapshotVA }}"
-        snapshot_name: "{{ VM_SnapshotVA }}_{{ VM_SnapshotVA }}_snapshot"
+        folder: "{{ folder }}"
+        name: 'vm1'  # Name of the VM for the IP 192.168.1.202
+        snapshot_name: "{{ snapshot_prefix }}_vm1_snapshot"
         memory: no
         state: present
-      with_items: "{{ vm_hosts }}"
       delegate_to: localhost
