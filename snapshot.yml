@@ -6,7 +6,7 @@
     vcenter_hostname: "192.168.1.70"
     vcenter_username: "root"
     vcenter_password: "kharian@82"
-    folder: "datastore1"
+    folder: "[datastore1] snapshots/"
     snapshot_prefix: "VM_SnapshotVA"
 
   tasks:
