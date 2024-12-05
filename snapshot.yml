@@ -2,6 +2,7 @@
 - name: Take VM Snapshot for a Single VM
   hosts: localhost
   become: yes
+  gather_facts: no
   vars:
     vcenter_hostname: "192.168.1.70"
     vcenter_username: "root"
